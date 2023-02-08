@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище zaimModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Dol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Pol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Zaim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_Должность" Type="int" />
+    <Property Name="Дата_Рождения" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_Пол" Type="int" />
+    <Property Name="Сумма_займа" Type="money" />
+  </EntityType>
+  <Association Name="FK_Zaim_Dol">
+    <End Role="Dol" Type="Self.Dol" Multiplicity="0..1" />
+    <End Role="Zaim" Type="Self.Zaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Zaim">
+        <PropertyRef Name="id_Должность" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zaim_Pol">
+    <End Role="Pol" Type="Self.Pol" Multiplicity="0..1" />
+    <End Role="Zaim" Type="Self.Zaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Zaim">
+        <PropertyRef Name="id_Пол" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище zaimModelContainer">
+    <EntitySet Name="Dol" EntityType="Self.Dol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pol" EntityType="Self.Pol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zaim" EntityType="Self.Zaim" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Zaim_Dol" Association="Self.FK_Zaim_Dol">
+      <End Role="Dol" EntitySet="Dol" />
+      <End Role="Zaim" EntitySet="Zaim" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zaim_Pol" Association="Self.FK_Zaim_Pol">
+      <End Role="Pol" EntitySet="Pol" />
+      <End Role="Zaim" EntitySet="Zaim" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

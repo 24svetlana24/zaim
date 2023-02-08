@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище zaimModelContainer" CdmEntityContainer="zaimEntities">
+    <EntitySetMapping Name="Dol">
+      <EntityTypeMapping TypeName="zaimModel.Dol">
+        <MappingFragment StoreEntitySet="Dol">
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pol">
+      <EntityTypeMapping TypeName="zaimModel.Pol">
+        <MappingFragment StoreEntitySet="Pol">
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="zaimModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zaim">
+      <EntityTypeMapping TypeName="zaimModel.Zaim">
+        <MappingFragment StoreEntitySet="Zaim">
+          <ScalarProperty Name="Сумма_займа" ColumnName="Сумма_займа" />
+          <ScalarProperty Name="id_Пол" ColumnName="id_Пол" />
+          <ScalarProperty Name="Дата_Рождения" ColumnName="Дата_Рождения" />
+          <ScalarProperty Name="id_Должность" ColumnName="id_Должность" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zaimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="zaimEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Dol" EntityType="zaimModel.Dol" />
+    <EntitySet Name="Pol" EntityType="zaimModel.Pol" />
+    <EntitySet Name="sysdiagrams" EntityType="zaimModel.sysdiagrams" />
+    <EntitySet Name="Zaim" EntityType="zaimModel.Zaim" />
+    <AssociationSet Name="FK_Zaim_Dol" Association="zaimModel.FK_Zaim_Dol">
+      <End Role="Dol" EntitySet="Dol" />
+      <End Role="Zaim" EntitySet="Zaim" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zaim_Pol" Association="zaimModel.FK_Zaim_Pol">
+      <End Role="Pol" EntitySet="Pol" />
+      <End Role="Zaim" EntitySet="Zaim" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Dol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Zaim" Relationship="zaimModel.FK_Zaim_Dol" FromRole="Dol" ToRole="Zaim" />
+  </EntityType>
+  <EntityType Name="Pol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Zaim" Relationship="zaimModel.FK_Zaim_Pol" FromRole="Pol" ToRole="Zaim" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Zaim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="id_Должность" Type="Int32" />
+    <Property Name="Дата_Рождения" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="id_Пол" Type="Int32" />
+    <Property Name="Сумма_займа" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Dol" Relationship="zaimModel.FK_Zaim_Dol" FromRole="Zaim" ToRole="Dol" />
+    <NavigationProperty Name="Pol" Relationship="zaimModel.FK_Zaim_Pol" FromRole="Zaim" ToRole="Pol" />
+  </EntityType>
+  <Association Name="FK_Zaim_Dol">
+    <End Type="zaimModel.Dol" Role="Dol" Multiplicity="0..1" />
+    <End Type="zaimModel.Zaim" Role="Zaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Zaim">
+        <PropertyRef Name="id_Должность" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zaim_Pol">
+    <End Type="zaimModel.Pol" Role="Pol" Multiplicity="0..1" />
+    <End Type="zaimModel.Zaim" Role="Zaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Zaim">
+        <PropertyRef Name="id_Пол" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
